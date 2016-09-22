@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="TIYAngularApp">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="js/ng-controller.js"></script>
+<body ng-controller="SampleController">
+{{! changing the mustache delimiter so it doesn't conflict with  }}
+{{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info  }}
+{{=<% %>=}}
+<%^user%>
+<form action="/login" method="post">
+    <input type="text" placeholder="Username" name="userName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
+    <button type="submit">Login</button>
+</form>
+<%/user%>
+
+<%#user%>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+<br><br>
+<h1>Hello <span ng-bind="name"></span></h1>
+<p><input type="text" ng-model="newTodo.text"><input type="button" ng-click="addTodo()" value="Add Todo"/><input type="button" ng-click="getTodos()" value="Get Todos"/></p>
+<br/><br/>
+<div style="position: relative; float: left; width: 40%; padding: 20px;">
+    <h2>Game List</h2>
+    <ul>
+        <li ng-repeat="todo in todos">
+            {{todo.text}}- {{todo.done}}
+            <button ng-click="deleteTodo(todo.id)">delete</button>
+            <button ng-click="toggleTodo(todo.id)">toggle</button>
+        </li>
+    </ul>
+</div>
+<%/user%>
+</body>
+</html>
